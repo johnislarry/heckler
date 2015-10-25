@@ -2,10 +2,13 @@
 
 const Client = require('./client');
 
-module.exports = {
+const config = {
   TWILIO_ACCOUNT_SID: '<ACCOUNT_TOKEN>',
   TWILIO_AUTH_TOKEN: '<AUTH_TOKEN>',
-  CLIENTS: [
-    new Client('Max Sherman', '<PHONE_NUMBER>'),
-  ],
+  SENDER: '<SENDER_NUMBER>',
+  CLIENTS: new Map([
+    ['<CLIENT_NAME>', new Client('<CLIENT_NAME>', '<PHONE_NUMBER>')],
+  ]),
 }
+
+module.exports = config;

@@ -1,10 +1,12 @@
 /* @flow */
-const twilio = require('twilio');
-let config = require('./config');
-/* $FlowUnsafe might not exist */
-const devConfig = require('./devConfig');
 
-config = devConfig || config;
+let config = require('./config');
+try {
+  config = require('./dev-config');
+} catch (_) {}
+
+/* $FlowUnsafe -- twilio module isn't flow clean */
+const twilio = require('twilio');
 
 const client = new twilio.RestClient(
   config.TWILIO_ACCOUNT_SID,
@@ -12,8 +14,8 @@ const client = new twilio.RestClient(
 );
 
 client.sms.messages.create({
-  to: '+14254423410',
-  from: '+12533439250',
+  to: config.CLIENTS.get('Max Sherman').number,
+  from: config.SENDER,
   body: 'This is a dank test ok.',
 }, function(error, message) {
     // The HTTP request to Twilio will run asynchronously. This callback
