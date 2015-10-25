@@ -1,6 +1,10 @@
 /* @flow */
 const twilio = require('twilio');
-const config = require('./config');
+let config = require('./config');
+/* $FlowUnsafe might not exist */
+const devConfig = require('./devConfig');
+
+config = devConfig || config;
 
 const client = new twilio.RestClient(
   config.TWILIO_ACCOUNT_SID,
