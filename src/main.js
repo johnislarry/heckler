@@ -14,7 +14,7 @@ const client = new twilio.RestClient(
 );
 
 client.sms.messages.create({
-  to: config.CLIENTS.get('Max Sherman').number,
+  to: config.CLIENTS['Max Sherman'].number,
   from: config.SENDER,
   body: 'This is a dank test ok.',
 }, function(error, message) {
